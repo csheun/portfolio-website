@@ -1,6 +1,5 @@
 /**
  * All personal content lives here. Edit this file to update the site.
- * Everything below is PLACEHOLDER content — replace it with your own.
  * Images go in /public/projects (any format; 16:10 works best for covers).
  */
 
@@ -16,8 +15,11 @@ export type Project = {
   /** Long-form paragraphs for the detail page */
   description: string[];
   highlights: string[];
-  role: string;
-  year: number;
+  role?: string;
+  /** Marks unfinished work; shows an "In progress" label */
+  inProgress?: boolean;
+  /** Optional; omit if unknown */
+  year?: number;
   tags: string[];
   links: { github?: string; live?: string };
   cover: Image;
@@ -40,142 +42,138 @@ export type Milestone = { year: string; title: string; detail: string };
 export type SkillGroup = { name: string; items: string[] };
 
 export const site = {
-  name: "Your Name",
+  name: "Chen Shun",
   role: "Software engineer",
   /** Hero statement, split into lines for the reveal animation */
-  headline: ["Building careful,", "fast interfaces", "for the web."],
+  headline: ["Software engineer", "across cloud,", "systems and data."],
   intro:
-    "A short introduction in two or three sentences. Say what you build, who you build it for, and what you care about in the work.",
-  location: "Your City",
+    "Computer Science graduate from the National University of Singapore. I've worked on a DevSecOps platform at DSTA, financial software at Quantedge, autonomous vehicle systems at Venti Technologies, and backend services at GovTech.",
+  location: "Singapore",
   availability: "Open to new opportunities",
-  email: "hello@example.com",
+  email: "chenshun2006@gmail.com",
   url: "https://example.com",
   resumeUrl: "", // e.g. "/resume.pdf" — leave empty to hide
   socials: [
-    { label: "GitHub", href: "https://github.com/your-handle", handle: "@your-handle" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/your-handle", handle: "in/your-handle" },
-    { label: "X", href: "https://x.com/your-handle", handle: "@your-handle" },
+    { label: "GitHub", href: "https://github.com/csheun", handle: "@csheun" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/chenshun", handle: "in/chenshun" },
+    // { label: "X", href: "https://x.com/your-handle", handle: "@your-handle" },
   ] satisfies SocialLink[],
 };
 
 export const bio: string[] = [
-  "Open with who you are and what you do today. One or two sentences that someone could repeat to a colleague.",
-  "Then describe how you work: the kinds of problems you like, the teams you have worked with, and the standards you hold yourself to.",
-  "Close with something personal or what you are looking for next.",
+  "I'm a software engineer based in Singapore. I studied Computer Science at the National University of Singapore, focusing on parallel computing, computer networks, and distributed systems.",
+  "My work spans backend services, robotics, finance, and cloud infrastructure: NestJS APIs and Camunda workflows at GovTech, autonomous vehicle software and hardware-in-the-loop testing at Venti Technologies, scaling financial systems at Quantedge, and running a DevSecOps platform at DSTA.",
+  "Outside of work I build machine learning projects, like a forecasting pipeline for soybean futures prices.",
 ];
 
 export const experience: Experience[] = [
   {
-    company: "Company name",
-    role: "Role title",
-    start: "2023",
-    end: "Present",
-    location: "City or Remote",
-    summary: "One sentence on the team, the product, and your scope.",
+    company: "Defence Science and Technology Agency (DSTA)",
+    role: "Project Manager, Cloud & Infrastructure",
+    start: "Nov 2025",
+    end: "Mar 2026",
+    location: "Singapore",
+    summary:
+      "Managed an internal DevSecOps platform that lets software engineering teams onboard projects and accelerate development within required security environments.",
     highlights: [
-      "A concrete outcome you were responsible for.",
-      "A system, feature, or process you built or improved.",
+      "Evaluated and onboarded new developer and security technologies, including scanning tools, by assessing technical requirements and integration with the existing platform.",
+      "Worked with software engineers to understand application requirements, assess platform suitability, and support project onboarding.",
+      "Coordinated infrastructure upgrades and capacity expansion, including server procurement and network connectivity requirements.",
     ],
   },
   {
-    company: "Company name",
-    role: "Role title",
-    start: "2020",
-    end: "2023",
-    location: "City or Remote",
-    summary: "One sentence on the team, the product, and your scope.",
+    company: "Quantedge",
+    role: "Software Engineer Intern",
+    start: "Jun 2025",
+    end: "Jul 2025",
+    location: "Singapore",
+    summary: "Built features and improved scalability in production financial software systems.",
     highlights: [
-      "A concrete outcome you were responsible for.",
-      "A system, feature, or process you built or improved.",
+      "Implemented new features in production-grade legacy codebases, minimizing regression risk through testing and safe development practices.",
+      "Debugged and analyzed complex financial software systems to find issues and ship changes across unfamiliar codebases.",
+      "Improved system scalability through horizontal and vertical scaling, and integrated KEDA for event-driven autoscaling.",
+    ],
+  },
+  {
+    company: "Venti Technologies",
+    role: "Software Engineer Intern",
+    start: "Aug 2024",
+    end: "Oct 2024",
+    location: "Singapore",
+    summary: "Worked on C++ and ROS software for autonomous vehicle systems.",
+    highlights: [
+      "Maintained C++ and ROS software components supporting autonomous vehicle systems.",
+      "Developed hardware-in-the-loop (HiL) tests to validate autonomous vehicle functionality and catch software regressions.",
+      "Contributed to an automated regression testing tool to improve system reliability and test coverage.",
+    ],
+  },
+  {
+    company: "GovTech Singapore",
+    role: "Software Engineer Intern",
+    start: "May 2023",
+    end: "Jun 2024",
+    location: "Singapore",
+    summary: "Built backend services for an RFID-based smart facility management platform for asset tracking and operational workflows.",
+    highlights: [
+      "Designed and implemented NestJS REST APIs and Camunda workflows to automate business processes and integrate system components.",
+      "Integrated IoT data streams into centralized backend systems, enabling real-time data processing and operational analytics.",
+      "Worked with engineers and stakeholders to develop, test, and maintain backend features across the platform.",
     ],
   },
 ];
 
 export const skills: SkillGroup[] = [
-  { name: "Languages", items: ["TypeScript", "JavaScript", "Python", "SQL"] },
-  { name: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "Accessibility"] },
-  { name: "Backend", items: ["Node.js", "PostgreSQL", "REST & GraphQL"] },
-  { name: "Tools", items: ["Git", "Figma", "Vercel", "Playwright"] },
+  { name: "Languages", items: ["Python", "C++", "JavaScript", "SQL", "Go", "Rust", "VBA"] },
+  { name: "Frameworks & technologies", items: ["NestJS", "React", "ROS", "Docker", "AWS", "MongoDB", "Camunda"] },
+  { name: "Data & ML", items: ["Pandas", "Scikit-learn", "XGBoost", "Hadoop", "Spark"] },
+  { name: "Systems", items: ["Linux", "Git", "Computer networks", "Distributed systems", "Operating systems", "CUDA"] },
+  { name: "Spoken languages", items: ["English", "Mandarin"] },
 ];
 
 /** Career timeline, oldest first */
 export const timeline: Milestone[] = [
-  { year: "2016", title: "Education", detail: "Degree, school, or how you started." },
-  { year: "2020", title: "First role", detail: "Where you began working professionally." },
-  { year: "2023", title: "Current role", detail: "What changed and what you took on." },
-  { year: "Next", title: "What you want next", detail: "The kind of work you are looking for." },
+  { year: "2021", title: "National University of Singapore", detail: "Started a Bachelor of Computing in Computer Science." },
+  { year: "2023", title: "GovTech Singapore", detail: "Software Engineer Intern, building backend services for a smart facility management platform." },
+  { year: "2024", title: "Venti Technologies", detail: "Software Engineer Intern on autonomous vehicle software and testing." },
+  { year: "2025", title: "Graduated from NUS", detail: "Computer Science, GPA 4.54 / 5.00. Interned at Quantedge on financial software systems." },
+  { year: "2025", title: "DSTA", detail: "Project Manager, Cloud & Infrastructure, running an internal DevSecOps platform." },
 ];
 
 export const projects: Project[] = [
   {
-    slug: "project-one",
-    title: "Project One",
-    summary: "One sentence describing what this project does and who it is for.",
-    description: [
-      "Describe the problem. What was hard or interesting about it, and why did it matter?",
-      "Describe your approach: the decisions you made, the trade-offs, and the role you played.",
-      "Describe the result. Use real numbers if you have them.",
-    ],
-    highlights: ["Key feature or decision", "Key feature or decision", "Key feature or decision"],
-    role: "Design & engineering",
-    year: 2025,
-    tags: ["Next.js", "TypeScript", "PostgreSQL"],
-    links: { github: "https://github.com/your-handle/project-one", live: "https://example.com" },
-    cover: { src: "/projects/project-one.svg", alt: "Project One interface screenshot" },
-    gallery: [
-      { src: "/projects/project-one-detail.svg", alt: "Project One detail view", caption: "Caption describing this screen." },
-    ],
-    featured: true,
-  },
-  {
-    slug: "project-two",
-    title: "Project Two",
-    summary: "One sentence describing what this project does and who it is for.",
-    description: [
-      "Describe the problem. What was hard or interesting about it, and why did it matter?",
-      "Describe your approach: the decisions you made, the trade-offs, and the role you played.",
-    ],
-    highlights: ["Key feature or decision", "Key feature or decision"],
-    role: "Frontend engineering",
-    year: 2024,
-    tags: ["React", "Motion", "Design systems"],
-    links: { github: "https://github.com/your-handle/project-two" },
-    cover: { src: "/projects/project-two.svg", alt: "Project Two interface screenshot" },
-    gallery: [
-      { src: "/projects/project-two-detail.svg", alt: "Project Two detail view", caption: "Caption describing this screen." },
-    ],
-    featured: true,
-  },
-  {
-    slug: "project-three",
-    title: "Project Three",
-    summary: "One sentence describing what this project does and who it is for.",
-    description: [
-      "Describe the problem. What was hard or interesting about it, and why did it matter?",
-      "Describe your approach: the decisions you made, the trade-offs, and the role you played.",
-    ],
-    highlights: ["Key feature or decision", "Key feature or decision"],
-    role: "Full-stack engineering",
-    year: 2023,
-    tags: ["Node.js", "GraphQL", "Testing"],
-    links: { live: "https://example.com" },
-    cover: { src: "/projects/project-three.svg", alt: "Project Three interface screenshot" },
+    slug: "personal-ai-assistant",
+    title: "Personal AI Assistant",
+    summary: "A personal AI assistant, currently in development.",
+    description: ["This project is in progress. Details will be added as it takes shape."],
+    highlights: [],
+    tags: [],
+    links: {},
+    cover: { src: "/projects/ai-assistant.svg", alt: "Personal AI Assistant placeholder image" },
     gallery: [],
     featured: true,
+    inProgress: true,
   },
   {
-    slug: "project-four",
-    title: "Project Four",
-    summary: "One sentence describing what this project does and who it is for.",
-    description: ["Describe the problem, your approach, and the result."],
-    highlights: ["Key feature or decision"],
-    role: "Side project",
-    year: 2022,
-    tags: ["Python", "Data", "CLI"],
-    links: { github: "https://github.com/your-handle/project-four" },
-    cover: { src: "/projects/project-four.svg", alt: "Project Four interface screenshot" },
+    slug: "soybean-futures-price-predictor",
+    title: "Soybean Futures Price Predictor",
+    summary: "A machine learning pipeline and interactive app that forecasts soybean futures prices from historical market data.",
+    description: [
+      "An end-to-end machine learning pipeline that forecasts soybean futures prices using historical time-series data from Yahoo Finance.",
+      "I engineered lag and moving-average features, trained XGBoost and Random Forest models, and compared their performance using RMSE.",
+      "An interactive Streamlit app lets you experiment with the models in real time and configure hyperparameters.",
+    ],
+    highlights: [
+      "End-to-end pipeline from data ingestion to prediction",
+      "Lag and moving-average feature engineering",
+      "XGBoost and Random Forest models evaluated with RMSE",
+      "Streamlit app for live experimentation and hyperparameter tuning",
+    ],
+    role: "Machine learning engineering",
+    tags: ["Python", "Pandas", "Scikit-learn", "XGBoost", "Streamlit"],
+    links: {}, // add { github: "...", live: "..." } to show buttons
+    cover: { src: "/projects/soybean-futures.svg", alt: "Soybean Futures Price Predictor placeholder image" },
     gallery: [],
-    featured: false,
+    featured: true,
   },
 ];
 

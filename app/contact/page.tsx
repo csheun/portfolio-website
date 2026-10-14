@@ -21,7 +21,7 @@ export default function ContactPage() {
           </h2>
           <a
             href={`mailto:${site.email}`}
-            className="display link-draw mt-4 inline-block pb-1 text-[clamp(2rem,6vw,4.5rem)] break-all transition-colors hover:text-brand sm:break-normal"
+            className="display link-draw mt-4 inline-block pb-1 text-[clamp(1.75rem,4.2vw,3.5rem)] [overflow-wrap:anywhere] transition-colors hover:text-brand"
           >
             {site.email}
           </a>

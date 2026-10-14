@@ -41,15 +41,15 @@
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Palette: lichen paper, spruce ink, ultramarine signal */
+/* Palette: white paper, spruce ink, ultramarine signal */
 :root {
-  --background: #eceee9;
+  --background: #ffffff;
   --foreground: #18211d;
   --muted-foreground: #56615a;
-  --border: #cdd3cb;
+  --border: #dfe3dd;
   --brand: #2f45e0;
   --brand-foreground: #f4f6ff;
-  --secondary: #e2e5df;
+  --secondary: #f2f4f1;
 
   --card: var(--secondary);
   --card-foreground: var(--foreground);
