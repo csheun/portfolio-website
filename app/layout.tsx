@@ -33,19 +33,20 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#eceee9" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#101714" },
   ],
 };
 
-// Applies the saved (or system) theme before first paint to avoid a flash.
-const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){}})()`;
+// Applies the saved theme before first paint to avoid a flash. Defaults to light.
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.dataset.theme=t}catch(e){}})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       data-theme="light"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${hanken.variable} ${newsreader.variable} antialiased`}
     >

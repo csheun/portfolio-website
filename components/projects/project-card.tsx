@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Project } from "@/content/portfolio";
 import { ProjectImage } from "./project-image";
+import { InProgressLabel } from "./status-label";
 import { TagList } from "./tag-list";
 
 export function ProjectCard({ project, priority }: { project: Project; priority?: boolean }) {
@@ -22,10 +23,15 @@ export function ProjectCard({ project, priority }: { project: Project; priority?
             {project.title}
           </Link>
         </h2>
-        <p className="text-sm text-muted-foreground tabular-nums">{project.year}</p>
+        {project.year && <p className="text-sm text-muted-foreground tabular-nums">{project.year}</p>}
       </div>
+      {project.inProgress && (
+        <div className="mt-3">
+          <InProgressLabel />
+        </div>
+      )}
       <p className="mt-2 max-w-[52ch] text-muted-foreground">{project.summary}</p>
-      <TagList tags={project.tags} className="mt-4" />
+      {project.tags.length > 0 && <TagList tags={project.tags} className="mt-4" />}
     </article>
   );
 }

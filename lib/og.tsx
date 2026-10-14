@@ -15,7 +15,7 @@ export function renderOg(title: string, subtitle: string) {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 80,
-          background: "#eceee9",
+          background: "#ffffff",
           color: "#18211d",
         }}
       >

@@ -9,7 +9,7 @@ export function ContactCta() {
       </h2>
       <a
         href={`mailto:${site.email}`}
-        className="display link-draw mt-6 inline-block pb-2 text-[clamp(2.5rem,9vw,8.5rem)] break-all transition-colors hover:text-brand sm:break-normal"
+        className="display link-draw mt-6 inline-block pb-2 text-[clamp(1.75rem,7vw,6.5rem)] [overflow-wrap:anywhere] transition-colors hover:text-brand"
       >
         {site.email}
       </a>

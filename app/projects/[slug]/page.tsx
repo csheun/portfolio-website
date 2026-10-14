@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { ProjectImage } from "@/components/projects/project-image";
+import { InProgressLabel } from "@/components/projects/status-label";
 import { TagList } from "@/components/projects/tag-list";
 import { buttonVariants } from "@/components/ui/button";
 import { getProject, projects } from "@/content/portfolio";
@@ -38,8 +39,8 @@ async function ProjectDetail({ params }: Pick<PageProps<"/projects/[slug]">, "pa
   const next = projects[(index + 1) % projects.length];
 
   const facts = [
-    { term: "Role", value: project.role },
-    { term: "Year", value: String(project.year) },
+    ...(project.role ? [{ term: "Role", value: project.role }] : []),
+    ...(project.year ? [{ term: "Year", value: String(project.year) }] : []),
   ];
 
   return (
@@ -49,6 +50,11 @@ async function ProjectDetail({ params }: Pick<PageProps<"/projects/[slug]">, "pa
           All work
         </Link>
         <h1 className="display mt-8 text-[clamp(3.25rem,10vw,8.5rem)]">{project.title}</h1>
+        {project.inProgress && (
+          <div className="mt-6">
+            <InProgressLabel />
+          </div>
+        )}
         <div className="mt-10 grid gap-10 md:grid-cols-12">
           <p className="max-w-[40ch] text-xl md:col-span-6 md:text-2xl md:leading-snug">{project.summary}</p>
           <div className="md:col-span-5 md:col-start-8">
@@ -59,12 +65,14 @@ async function ProjectDetail({ params }: Pick<PageProps<"/projects/[slug]">, "pa
                   <dd className="mt-1">{f.value}</dd>
                 </div>
               ))}
-              <div className="col-span-2">
-                <dt className="sr-only">Technologies</dt>
-                <dd>
-                  <TagList tags={project.tags} />
-                </dd>
-              </div>
+              {project.tags.length > 0 && (
+                <div className="col-span-2">
+                  <dt className="sr-only">Technologies</dt>
+                  <dd>
+                    <TagList tags={project.tags} />
+                  </dd>
+                </div>
+              )}
             </dl>
             {(project.links.live || project.links.github) && (
               <div className="mt-8 flex flex-wrap gap-3">

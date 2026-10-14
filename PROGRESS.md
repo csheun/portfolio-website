@@ -8,9 +8,11 @@
 - Light/dark theme via inline pre-paint script + localStorage (no next-themes).
 - Validated: tsc, eslint, production build, desktop/mobile browser checks.
 
+- Real content from résumé added to `content/portfolio.ts` (bio, 4 roles, skills, timeline, 1 project).
+
 ## Remaining
-- Replace placeholder content and images in `content/portfolio.ts` and `public/projects/`.
-- Set `site.url` to the real domain; optionally add `resumeUrl`.
+- Soybean project: real screenshot (`public/projects/soybean-futures.svg` is a placeholder), GitHub/demo links, year.
+- Confirm `site.availability` wording; set `site.url` to the real domain; optionally add `resumeUrl`.
 - Deploy to Vercel (awaiting approval).
 
 ## Decisions

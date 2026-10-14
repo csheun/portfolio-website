@@ -5,9 +5,10 @@ import Link from "next/link";
 import { useRef, useState, type PointerEvent } from "react";
 import type { Project } from "@/content/portfolio";
 import { ProjectImage } from "./project-image";
+import { InProgressLabel } from "./status-label";
 import { TagList } from "./tag-list";
 
-type Item = Pick<Project, "slug" | "title" | "summary" | "year" | "tags" | "cover">;
+type Item = Pick<Project, "slug" | "title" | "summary" | "year" | "tags" | "cover" | "inProgress">;
 
 /** Typographic project list. On hover-capable devices a cover preview follows the cursor. */
 export function ProjectIndex({ projects }: { projects: Item[] }) {
@@ -47,8 +48,13 @@ export function ProjectIndex({ projects }: { projects: Item[] }) {
               {p.title}
             </h3>
             <div className="md:col-span-5">
+              {p.inProgress && (
+                <div className="mb-3">
+                  <InProgressLabel />
+                </div>
+              )}
               <p className="max-w-[46ch] text-muted-foreground">{p.summary}</p>
-              <TagList tags={p.tags} className="mt-4" />
+              {p.tags.length > 0 && <TagList tags={p.tags} className="mt-4" />}
             </div>
             <p className="text-sm text-muted-foreground tabular-nums md:col-span-1 md:text-right">
               {p.year}

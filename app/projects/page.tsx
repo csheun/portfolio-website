@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
-  const sorted = [...projects].sort((a, b) => b.year - a.year);
+  const sorted = [...projects].sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
 
   return (
     <>

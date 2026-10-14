@@ -52,7 +52,7 @@ export default function HomePage() {
           </Link>
         </div>
         <ProjectIndex
-          projects={featuredProjects.map(({ slug, title, summary, year, tags, cover }) => ({ slug, title, summary, year, tags, cover }))}
+          projects={featuredProjects.map(({ slug, title, summary, year, tags, cover, inProgress }) => ({ slug, title, summary, year, tags, cover, inProgress }))}
         />
       </section>
 
