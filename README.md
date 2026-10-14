@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
 
-## Getting Started
+Personal portfolio built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui (Base UI), and Motion. Every page is statically prerendered.
 
-First, run the development server:
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run lint
+npm run build && npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Requires Node 20.9+.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Update your content
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Everything personal lives in **`content/portfolio.ts`**: name, headline, intro, email, socials, bio, experience, skills, timeline, and projects. All values ship as placeholders.
 
-## Learn More
+- **Projects:** add an entry to `projects`. `featured: true` shows it on the home page. The `slug` becomes the URL (`/projects/<slug>`).
+- **Images:** put screenshots in `public/projects/` and reference them as `/projects/file.png`. Covers display at 16:10. Replace the placeholder `.svg` files.
+- **Résumé:** drop a PDF in `public/` and set `site.resumeUrl` (e.g. `"/resume.pdf"`).
+- **Site URL:** set `site.url` to your domain; it drives canonical URLs, the sitemap, and Open Graph images.
+- **Colors/fonts:** tokens are at the top of `app/globals.css`; fonts are set in `app/layout.tsx`.
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy to Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Push this repo to GitHub.
+2. In Vercel, choose **Add New → Project** and import the repo. The defaults work; no environment variables are needed.
+3. Add your domain under **Settings → Domains**, then update `site.url`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Or use the CLI: `npx vercel` (preview) and `npx vercel --prod`.
 
-## Deploy on Vercel
+## Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/                 routes, metadata, OG images, sitemap, robots
+components/layout/   header, nav, mobile menu, theme toggle, footer
+components/projects/ project list, card, image, tags
+components/ui/       shadcn/ui primitives
+content/             portfolio.ts — all editable content
+lib/                 utilities, OG image renderer
+```
