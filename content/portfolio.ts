@@ -63,7 +63,7 @@ export const site = {
 export const bio: string[] = [
   "I'm a software engineer based in Singapore. I studied Computer Science at the National University of Singapore, focusing on parallel computing, computer networks, and distributed systems.",
   "My work spans backend services, robotics, finance, and cloud infrastructure: NestJS APIs and Camunda workflows at GovTech, autonomous vehicle software and hardware-in-the-loop testing at Venti Technologies, scaling financial systems at Quantedge, and running a DevSecOps platform at DSTA.",
-  "Outside of work I build machine learning projects, like a forecasting pipeline for soybean futures prices.",
+  "Outside of work I build AI and machine learning projects, like a personal AI assistant that plans and runs tasks with live tools, and a forecasting pipeline for soybean futures prices.",
 ];
 
 export const experience: Experience[] = [
@@ -143,15 +143,66 @@ export const projects: Project[] = [
   {
     slug: "personal-ai-assistant",
     title: "Personal AI Assistant",
-    summary: "A personal AI assistant, currently in development.",
-    description: ["This project is in progress. Details will be added as it takes shape."],
-    highlights: [],
-    tags: [],
-    links: {},
-    cover: { src: "/projects/ai-assistant.svg", alt: "Personal AI Assistant placeholder image" },
-    gallery: [],
-    featured: true,
+    summary:
+      "A full-stack AI assistant that plans before it acts: an LLM drafts a plan, the backend validates it, steps run in parallel with live progress, and nothing is sent until you approve it.",
+    description: [
+      "You ask in plain language, for example “Check tomorrow's weather in Singapore, search for recent AI news, summarize both, and send the summary to Telegram.” An LLM turns that into a plan, the backend checks it, independent steps run at the same time while the browser shows live progress, and the message is only sent after you approve its exact text.",
+      "The backend is FastAPI. A LangGraph planner asks the LLM (Groq, OpenAI or Anthropic through LangChain) for a structured plan and gives it one chance to repair a plan that fails validation. Every plan is checked against a typed tool registry before anything runs: registered tools only, valid arguments, no dependency cycles, size limits, and approval for anything that acts on the outside world. A single asyncio executor then runs the plan as a dependency graph, calling Open-Meteo for weather, Tavily for web search, the LLM for the summary and the Telegram Bot API for delivery.",
+      "Every state change is an event. The backend applies events with a reducer and streams them over Server-Sent Events; the Next.js frontend applies the same events with a TypeScript twin of that reducer, so a page refresh or dropped connection resumes exactly where it left off. A fixture recorded from the Python executor is replayed in the frontend's tests to keep both sides in agreement.",
+      "The LLM never executes anything: it returns a plan and Python decides what runs. The Telegram recipient is fixed in server configuration, the text you approve is frozen and sent at most once, and a send that Telegram doesn't confirm is reported as “delivery unknown” instead of being retried. Web content reaches the model fenced as untrusted data, and citations are limited to URLs the search actually returned.",
+      "I built it in four milestones: a FastAPI and tool-calling foundation, a mock-driven frontend, the frontend-to-backend integration with SSE, and finally real LLM planning and real integrations. It can also run fully mocked, with no API keys, for demos and tests.",
+    ],
+    highlights: [
+      "LangGraph planner with structured output, backend validation and one bounded repair attempt",
+      "Plans validated against a typed tool registry (schemas, risk levels, timeouts) before execution",
+      "Parallel DAG execution with asyncio and live progress over resumable Server-Sent Events",
+      "Human-in-the-loop approvals with at-most-once Telegram delivery of the exact approved text",
+      "The same event reducer in Python and TypeScript, kept in sync by a shared contract fixture",
+      "Provider-agnostic LLM layer (Groq, OpenAI, Anthropic) with timeouts and token usage tracking",
+      "230 automated tests across pytest, Vitest and Playwright (desktop and mobile), with network access blocked in unit tests",
+    ],
+    role: "Full-stack and AI engineering",
+    year: 2026,
     inProgress: true,
+    tags: ["Python", "FastAPI", "LangGraph", "LangChain", "TypeScript", "Next.js", "React", "Tailwind CSS", "Playwright"],
+    links: { github: "https://github.com/csheun/personal-ai-assistant" },
+    cover: {
+      src: "/projects/personal-ai-assistant/cover.png",
+      alt: "The assistant after a completed run: a summary of tomorrow's Singapore weather and recent AI news with cited sources, next to the run's timeline",
+    },
+    gallery: [
+      {
+        src: "/projects/personal-ai-assistant/plan.png",
+        alt: "A plan proposed by the LLM, shown before anything runs",
+        caption: "The plan the LLM proposed, shown before anything runs: weather and news in parallel, then a summary, then Telegram behind approval.",
+      },
+      {
+        src: "/projects/personal-ai-assistant/running.png",
+        alt: "The live timeline while the weather and search steps run at the same time",
+        caption: "Live progress over Server-Sent Events. Independent steps run side by side on a shared timeline.",
+      },
+      {
+        src: "/projects/personal-ai-assistant/approval.png",
+        alt: "The approval card showing the exact Telegram message before it is sent",
+        caption: "Nothing is sent until you approve. The card shows the exact text that will go out.",
+      },
+      {
+        src: "/projects/personal-ai-assistant/architecture.png",
+        alt: "Architecture diagram from the Next.js frontend through FastAPI, the planner, validator and executor to external services",
+        caption: "Architecture: the LLM proposes a plan, the validator decides, and a single executor runs it and streams every change back to the browser.",
+      },
+      {
+        src: "/projects/personal-ai-assistant/request-flow.png",
+        alt: "Sequence diagram of one request from chat message to Telegram delivery",
+        caption: "One request end to end, from the chat message to the approved Telegram delivery.",
+      },
+      {
+        src: "/projects/personal-ai-assistant/completed-dark.png",
+        alt: "A completed run in dark mode with the summary and its cited sources",
+        caption: "A completed run in dark mode, with the summary's cited sources.",
+      },
+    ],
+    featured: true,
   },
   {
     slug: "soybean-futures-price-predictor",
